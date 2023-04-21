@@ -7,20 +7,28 @@ public class HeroMovement : MonoBehaviour
 {
     [SerializeField] float RunSpeed = 5f;
     [SerializeField] float JumpHeight = 5f;
+    float FallVelocity;
     Vector2 MoveInput;
     Vector2 PlayerVelocity;
     Vector2 PlayerJumpHeight;
     Rigidbody2D myRigidbody;
+    PolygonCollider2D myBodyCollider;
+    BoxCollider2D myFeetCollider;
     Animator myAnimator;
     void Start()
     {
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
+        myFeetCollider = GetComponent<BoxCollider2D>();
+        myBodyCollider = GetComponent<PolygonCollider2D>();
+        FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
     {
         Run();
         FlipSprite();
+        Falling();
+        Rising();
     }
     void OnMove(InputValue value)
     {
@@ -28,17 +36,10 @@ public class HeroMovement : MonoBehaviour
     }
     void OnJump(InputValue value)
     {
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+
         PlayerJumpHeight = new Vector2(MoveInput.x * RunSpeed, JumpHeight);
         myRigidbody.velocity = PlayerJumpHeight;
-        if(myRigidbody.velocity.y > PlayerJumpHeight.y)
-        {
-            myAnimator.SetBool("IsJumping", true);
-        }
-        else 
-        {
-            myAnimator.SetBool("IsJumping", false);
-        }
-        
     }
     void Run()
     {
@@ -57,6 +58,29 @@ public class HeroMovement : MonoBehaviour
         {
             myAnimator.SetBool("IsRunning", false);
         }
+    }
+
+    void Falling()
+    {
+        if (transform.position.y < FallVelocity && !myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            myAnimator.SetBool("IsFalling", true);
+            myAnimator.SetBool("IsRising", false);
+        }
+        if (myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            myAnimator.SetBool("IsFalling", false);
+            myAnimator.SetBool("IsRising", false);
+        }
+        FallVelocity = transform.position.y;
+    }
+    void Rising()
+    {
+        if (FallVelocity <= transform.position.y && !myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground")))
+        {
+            myAnimator.SetBool("IsRising", true);
+        }
+        FallVelocity = transform.position.y;
     }
 }
 
