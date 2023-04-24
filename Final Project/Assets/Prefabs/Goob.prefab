@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 515608125}
   - component: {fileID: 515608123}
   - component: {fileID: 515608124}
+  - component: {fileID: 515608136}
   m_Layer: 8
   m_Name: Goob
   m_TagString: Untagged
@@ -144,7 +145,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.014773965, y: 0.106512874}
+  m_Offset: {x: -0.08661699, y: -0.56701726}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -155,7 +156,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9758117, y: 1.4737234}
+  m_Size: {x: 0.5387659, y: 0.21048033}
   m_EdgeRadius: 0
 --- !u!114 &515608123
 MonoBehaviour:
@@ -201,3 +202,19 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!70 &515608136
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1080398897350904198}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: 8ff2dcf484a6db040b7bb87b7d775ea0, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.030866623, y: 0.12732494}
+  m_Size: {x: 1.0553999, y: 1.4643834}
+  m_Direction: 0

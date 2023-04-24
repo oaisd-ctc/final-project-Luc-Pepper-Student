@@ -2,25 +2,31 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class HeroMovement : MonoBehaviour
 {
     [SerializeField] float RunSpeed = 5f;
     [SerializeField] float JumpHeight = 5f;
+    [SerializeField] float RollSpeed = 10f;
+    [SerializeField] float RollDuration = 5f;
     float FallVelocity;
+    float DefaultRunSpeed;
     Vector2 MoveInput;
     Vector2 PlayerVelocity;
+    Vector2 PlayerRollVelocity;
     Vector2 PlayerJumpHeight;
     Rigidbody2D myRigidbody;
-    PolygonCollider2D myBodyCollider;
+    CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
     Animator myAnimator;
     void Start()
     {
+        DefaultRunSpeed = RunSpeed;
         myRigidbody = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         myFeetCollider = GetComponent<BoxCollider2D>();
-        myBodyCollider = GetComponent<PolygonCollider2D>();
+        myBodyCollider = GetComponent<CapsuleCollider2D>();
         FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
@@ -34,17 +40,18 @@ public class HeroMovement : MonoBehaviour
     {
         MoveInput = value.Get<Vector2>();
     }
+    void Run()
+    {
+        PlayerVelocity = new Vector2(MoveInput.x * RunSpeed, myRigidbody.velocity.y);
+        myRigidbody.velocity = PlayerVelocity;
+        Invoke("ReturnSpeedToDefault", RollDuration);
+    }
     void OnJump(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
 
         PlayerJumpHeight = new Vector2(MoveInput.x * RunSpeed, JumpHeight);
         myRigidbody.velocity = PlayerJumpHeight;
-    }
-    void Run()
-    {
-        PlayerVelocity = new Vector2(MoveInput.x * RunSpeed, myRigidbody.velocity.y);
-        myRigidbody.velocity = PlayerVelocity;
     }
     void FlipSprite()
     {
@@ -82,5 +89,16 @@ public class HeroMovement : MonoBehaviour
         }
         FallVelocity = transform.position.y;
     }
+    void OnRoll(InputValue value)
+    {
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        RunSpeed = RollSpeed;
+        myAnimator.SetBool("IsRolling", true);
+    }
+    void ReturnSpeedToDefault()
+    {
+        RunSpeed = DefaultRunSpeed;
+        myAnimator.SetBool("IsRolling", false);
+        CancelInvoke();
+    }
 }
-
