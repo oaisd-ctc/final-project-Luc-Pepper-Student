@@ -10,6 +10,9 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] float JumpHeight = 5f;
     [SerializeField] float RollSpeed = 10f;
     [SerializeField] float RollDuration = 5f;
+    [SerializeField] float ShootDuration = 5f;
+    [SerializeField] GameObject Arrow;
+    [SerializeField] Transform Bow;
     float FallVelocity;
     float DefaultRunSpeed;
     Vector2 MoveInput;
@@ -95,10 +98,24 @@ public class HeroMovement : MonoBehaviour
         RunSpeed = RollSpeed;
         myAnimator.SetBool("IsRolling", true);
     }
+    void OnFire(InputValue value)
+    {
+        if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        Instantiate(Arrow, Bow.position, transform.rotation);
+        myAnimator.SetBool("IsShooting", true);
+        Invoke("EndFire", ShootDuration);
+    }
+
     void ReturnSpeedToDefault()
     {
         RunSpeed = DefaultRunSpeed;
         myAnimator.SetBool("IsRolling", false);
-        CancelInvoke();
+        CancelInvoke("ReturnSpeedToDefault");
     }
+    void EndFire()
+    {
+        myAnimator.SetBool("IsShooting", false);
+        CancelInvoke("EndFire");
+    }
+
 }
