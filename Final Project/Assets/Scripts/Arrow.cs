@@ -24,5 +24,6 @@ public class Arrow : MonoBehaviour
     void DestoryArrow()
     {
         Destroy(this);
+        CancelInvoke("DestoryArrow");
     }
 }

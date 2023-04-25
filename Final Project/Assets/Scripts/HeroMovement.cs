@@ -11,6 +11,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] float RollSpeed = 10f;
     [SerializeField] float RollDuration = 5f;
     [SerializeField] float ShootDuration = 5f;
+    [SerializeField] float ShotDelay = 5f;
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
     float FallVelocity;
@@ -101,7 +102,7 @@ public class HeroMovement : MonoBehaviour
     void OnFire(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
-        Instantiate(Arrow, Bow.position, transform.rotation);
+        Invoke("Shoot", ShotDelay);
         myAnimator.SetBool("IsShooting", true);
         Invoke("EndFire", ShootDuration);
     }
@@ -116,6 +117,11 @@ public class HeroMovement : MonoBehaviour
     {
         myAnimator.SetBool("IsShooting", false);
         CancelInvoke("EndFire");
+    }
+    void Shoot()
+    {
+        Instantiate(Arrow, Bow.position, transform.rotation);
+        CancelInvoke("Shoot");
     }
 
 }
