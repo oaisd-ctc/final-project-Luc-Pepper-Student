@@ -12,8 +12,12 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] float RollDuration = 5f;
     [SerializeField] float ShootDuration = 5f;
     [SerializeField] float ShotDelay = 5f;
+    [SerializeField] float SwingDuration = 5f;
+    [SerializeField] float Cooldown = 5f;
+    float LastShot;
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
+    int AttackAnimationInteger = 2;
     float FallVelocity;
     float DefaultRunSpeed;
     Vector2 MoveInput;
@@ -99,9 +103,11 @@ public class HeroMovement : MonoBehaviour
         RunSpeed = RollSpeed;
         myAnimator.SetBool("IsRolling", true);
     }
-    void OnFire(InputValue value)
+    void OnBowShoot(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if(Time.time - LastShot < Cooldown) { return; }
+        LastShot = Time.time;
         Invoke("Shoot", ShotDelay);
         myAnimator.SetBool("IsShooting", true);
         Invoke("EndFire", ShootDuration);
@@ -120,8 +126,33 @@ public class HeroMovement : MonoBehaviour
     }
     void Shoot()
     {
-        Instantiate(Arrow, Bow.position, transform.rotation);
-        CancelInvoke("Shoot");
+        if (myAnimator.GetBool("IsShooting") == true)
+        {
+            Instantiate(Arrow, Bow.position, transform.rotation);
+            CancelInvoke("Shoot");
+        }
+        else { return; }
     }
-
+    void OnFire()
+    {
+        if(Time.time - LastShot < Cooldown) { return; }
+        LastShot = Time.time;
+        myAnimator.SetBool("IsSwingingSword", true);
+        ChangeSwingAnimation();
+        Invoke("CancelSword", SwingDuration);
+    }
+    void CancelSword()
+    {
+        myAnimator.SetBool("IsSwingingSword", false);
+        CancelInvoke("CancelSword");
+    }
+    void ChangeSwingAnimation()
+    {
+        AttackAnimationInteger = AttackAnimationInteger + 1;
+        if (AttackAnimationInteger > 2)
+        {
+            AttackAnimationInteger = 0;
+        }
+        myAnimator.SetInteger("AttackAnimation", AttackAnimationInteger);
+    }
 }

@@ -173,8 +173,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RunSpeed: 6
   JumpHeight: 7
-  RollSpeed: 12
+  RollSpeed: 10
   RollDuration: 0.5
+  ShootDuration: 0.8
+  ShotDelay: 0.68
+  Arrow: {fileID: 4873118718724218143, guid: 091eefe8e880cdb4b810d3e55eb99ac7, type: 3}
+  Bow: {fileID: 6530384321143265901}
 --- !u!114 &515608124
 MonoBehaviour:
   m_ObjectHideFlags: 0

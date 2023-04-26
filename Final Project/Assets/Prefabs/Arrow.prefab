@@ -165,5 +165,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fedb911a4839b14eb0fff4625313507, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ArrowSpeed: 10
-  ArrowDrop: 0
+  ArrowSpeed: 16
+  ArrowDrop: 0.1
+  ArrowLifeTime: 1.5

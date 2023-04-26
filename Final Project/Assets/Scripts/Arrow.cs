@@ -19,11 +19,15 @@ public class Arrow : MonoBehaviour
     void Update()
     {
         myRigidBody.velocity = new Vector2(xSpeed, -ArrowDrop);
-        Invoke("DestroyArrow", ArrowLifeTime);
+        Destroy(gameObject, ArrowLifeTime);
+        FlipArrow();
     }
-    void DestoryArrow()
+    void FlipArrow()
     {
-        Destroy(this);
-        CancelInvoke("DestoryArrow");
+        bool ArrowDirection = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon;
+        if (ArrowDirection)
+        {
+            transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+        }
     }
 }
