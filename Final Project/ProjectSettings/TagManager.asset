@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Player
   - Arrows
-  - 
+  - Enemies
   - 
   - 
   - 
@@ -47,6 +47,9 @@ TagManager:
     locked: 0
   - name: Ground
     uniqueID: 4013200929
+    locked: 0
+  - name: Enemy
+    uniqueID: 4043267737
     locked: 0
   - name: Player
     uniqueID: 3794497095

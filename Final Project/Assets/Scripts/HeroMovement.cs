@@ -100,6 +100,7 @@ public class HeroMovement : MonoBehaviour
     void OnRoll(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
+        if (myAnimator.GetBool("IsShooting") == true || myAnimator.GetBool("IsSwingingSword") == true) { return; }
         RunSpeed = RollSpeed;
         myAnimator.SetBool("IsRolling", true);
     }
