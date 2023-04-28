@@ -4,21 +4,26 @@ using UnityEngine;
 
 public class EnemyScript : MonoBehaviour
 {
+    [SerializeField] GameObject PointA;
+    [SerializeField] GameObject PointB;
+    [SerializeField] GameObject RunPoint;
     [SerializeField] float EnemyWalkSpeed = 5f;
     [SerializeField] float EnemyRunSpeed = 10f;
     [SerializeField] float EnemyMoveSpeed = 5f;
-
-    bool CanSeePlayer;
     Rigidbody2D EnemyRigidBody;
+    public PolygonCollider2D EnemyPolygonCollider;
     BoxCollider2D EnemyBoxCollider;
     CapsuleCollider2D EnemyCapsuleCollider;
     Animator EnemyAnimator;
+    Transform CurrentPoint;
     void Start()
     {
         EnemyRigidBody = GetComponent<Rigidbody2D>();
         EnemyBoxCollider = GetComponent<BoxCollider2D>();
+        EnemyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         EnemyAnimator = GetComponent<Animator>();
         EnemyMoveSpeed = EnemyWalkSpeed;
+        CurrentPoint = PointA.transform;
     }
     void Update()
     {
@@ -27,7 +32,37 @@ public class EnemyScript : MonoBehaviour
 
     void Move()
     {
-        EnemyRigidBody.velocity = new Vector2(EnemyMoveSpeed, 0f);
+        if (EnemyAnimator.GetBool("IsRunning") == true)
+        {
+            PointA = RunPoint;
+            FlipandSpeed();
+        }
+        else
+        {
+            FlipandSpeed();
+        }
+    }
+    void FlipandSpeed()
+    {
+        Vector2 point = CurrentPoint.position - transform.position;
+        if (CurrentPoint == PointB.transform)
+        {
+            EnemyRigidBody.velocity = new Vector2(-EnemyMoveSpeed, 0);
+        }
+        else
+        {
+            EnemyRigidBody.velocity = new Vector2(EnemyMoveSpeed, 0);
+        }
+        if (Vector2.Distance(transform.position, CurrentPoint.position) < 0.5f && CurrentPoint == PointA.transform)
+        {
+            Flip();
+            CurrentPoint = PointB.transform;
+        }
+        if (Vector2.Distance(transform.position, CurrentPoint.position) < 0.5f && CurrentPoint == PointB.transform)
+        {
+            Flip();
+            CurrentPoint = PointA.transform;
+        }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -39,15 +74,25 @@ public class EnemyScript : MonoBehaviour
     }
     void OnTriggerExit2D(Collider2D other)
     {
-        EnemyAnimator.SetBool("IsRunning", false);
-        EnemyMoveSpeed = EnemyWalkSpeed;
-    }
-    void OnTriggerEnter2D(CapsuleCollider2D other)
-    {
-        if (other.tag == "Ground")
+        if (other.tag == "Player")
         {
-            transform.localScale = new Vector2(Mathf.Sign(-EnemyRigidBody.velocity.x), 1f);
+            EnemyAnimator.SetBool("IsRunning", false);
+            EnemyMoveSpeed = EnemyWalkSpeed;
         }
+    }
+
+    void Flip()
+    {
+        Vector3 localScale = transform.localScale;
+        localScale.x *= -1;
+        transform.localScale = localScale;
+    }
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(PointA.transform.position, 0.5f);
+        Gizmos.DrawWireSphere(PointB.transform.position, 0.5f);
+        Gizmos.DrawWireSphere(RunPoint.transform.position, 0.5f);
+        Gizmos.DrawLine(PointA.transform.position, PointB.transform.position);
     }
 }
 

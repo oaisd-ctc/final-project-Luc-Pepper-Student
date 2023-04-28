@@ -8,10 +8,13 @@ public class Arrow : MonoBehaviour
     [SerializeField] float ArrowDrop = 0f;
     [SerializeField] float ArrowLifeTime = 5f;
     Rigidbody2D myRigidBody;
+    EnemyScript EnemyScript;
     HeroMovement player;
+    float ArrowHitTimer = .1f;
     float xSpeed;
     void Start()
     {
+        EnemyScript = GetComponent<EnemyScript>();
         myRigidBody = GetComponent<Rigidbody2D>();
         player = FindObjectOfType<HeroMovement>();
         xSpeed = player.transform.localScale.x * ArrowSpeed;
@@ -29,5 +32,16 @@ public class Arrow : MonoBehaviour
         {
             transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
         }
+    }
+    void OnCollisionEnter2D(Collision2D other) 
+    {
+        if (other.collider == EnemyScript.EnemyPolygonCollider)
+        {
+            DestoryOnHit();
+        }
+    }
+    void DestoryOnHit()
+    {
+        Destroy(gameObject, ArrowHitTimer);
     }
 }
