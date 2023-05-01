@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -2683277877920164757}
   - component: {fileID: 1948558274849256237}
   - component: {fileID: 6991408100679782889}
-  - component: {fileID: 3787681319777608369}
+  - component: {fileID: 3529913838713943378}
   m_Layer: 9
   m_Name: Arrow
   m_TagString: Arrow
@@ -169,8 +169,8 @@ MonoBehaviour:
   ArrowSpeed: 16
   ArrowDrop: 0.1
   ArrowLifeTime: 1
---- !u!61 &3787681319777608369
-BoxCollider2D:
+--- !u!60 &3529913838713943378
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -182,7 +182,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5348195, y: 0.023429744}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -192,6 +192,27 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.030868292, y: 0.070012376}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5617521, y: 0.028539712}
+      - {x: 0.42986694, y: 0.08977739}
+      - {x: 0.37656888, y: 0.108393826}
+      - {x: 0.30174738, y: 0.14753821}
+      - {x: 0.18991587, y: 0.076898694}
+      - {x: 0.04675214, y: 0.08710783}
+      - {x: -0.027683515, y: 0.08358479}
+      - {x: -0.265, y: 0.095}
+      - {x: -0.30638596, y: 0.09928877}
+      - {x: -0.345, y: 0.125}
+      - {x: -0.355, y: 0.13499999}
+      - {x: -0.545, y: 0.13499999}
+      - {x: -0.545, y: -0.13499999}
+      - {x: -0.3778793, y: -0.11801629}
+      - {x: -0.26626116, y: -0.07531765}
+      - {x: -0.08877284, y: -0.063075125}
+      - {x: 0.12483972, y: -0.050050247}
+      - {x: 0.17998657, y: -0.05823483}
+      - {x: 0.22050352, y: -0.062480953}
+      - {x: 0.30332887, y: -0.103302}
+      - {x: 0.37502682, y: -0.078261696}
+      - {x: 0.5302189, y: 0.0017520254}

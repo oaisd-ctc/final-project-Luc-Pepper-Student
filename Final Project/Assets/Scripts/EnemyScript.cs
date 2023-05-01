@@ -19,6 +19,7 @@ public class EnemyScript : MonoBehaviour
     void Start()
     {
         EnemyRigidBody = GetComponent<Rigidbody2D>();
+        EnemyPolygonCollider = GetComponent<PolygonCollider2D>();
         EnemyBoxCollider = GetComponent<BoxCollider2D>();
         EnemyCapsuleCollider = GetComponent<CapsuleCollider2D>();
         EnemyAnimator = GetComponent<Animator>();
@@ -93,6 +94,10 @@ public class EnemyScript : MonoBehaviour
         Gizmos.DrawWireSphere(PointB.transform.position, 0.5f);
         Gizmos.DrawWireSphere(RunPoint.transform.position, 0.5f);
         Gizmos.DrawLine(PointA.transform.position, PointB.transform.position);
+    }
+    void OnCollisionEnter2D(Collision2D other)
+    {
+        if ()
     }
 }
 
