@@ -34,10 +34,11 @@ public class Arrow : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D other)
     {
+        Destroy(gameObject);
         if (other.tag == "EnemyHitBox")
         {
-            Debug.Log("Hit");
-            Destroy(gameObject);
+            Debug.Log("ArrowHit");
+            Enemy.EnemyTakeDamage(1);
         }
     }
 }

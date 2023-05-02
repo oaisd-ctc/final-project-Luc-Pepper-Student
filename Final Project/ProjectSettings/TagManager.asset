@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Arrow
   - EnemyHitBox
+  - PlayerSwordHitBox
   layers:
   - Default
   - TransparentFX

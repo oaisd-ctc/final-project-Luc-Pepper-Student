@@ -156,4 +156,13 @@ public class HeroMovement : MonoBehaviour
         }
         myAnimator.SetInteger("AttackAnimation", AttackAnimationInteger);
     }
+    void OnTriggerStay2D(Collider2D other) 
+    {
+        Debug.Log("Debug");
+        if (myAnimator.GetBool("IsSwingingSword") == false) { return; }
+        if (other.tag == "EnemyHitBox")
+        {
+            Debug.Log("SwordHit");
+        }
+    }
 }
