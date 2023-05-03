@@ -17,6 +17,7 @@ public class HeroMovement : MonoBehaviour
     float LastShot;
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
+    bool First = true;
     int AttackAnimationInteger = 2;
     float FallVelocity;
     float DefaultRunSpeed;
@@ -28,6 +29,7 @@ public class HeroMovement : MonoBehaviour
     CapsuleCollider2D myBodyCollider;
     BoxCollider2D myFeetCollider;
     Animator myAnimator;
+    EnemyScript Enemy;
     void Start()
     {
         DefaultRunSpeed = RunSpeed;
@@ -35,6 +37,7 @@ public class HeroMovement : MonoBehaviour
         myAnimator = GetComponent<Animator>();
         myFeetCollider = GetComponent<BoxCollider2D>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
+        Enemy = FindObjectOfType<EnemyScript>();
         FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
@@ -107,7 +110,7 @@ public class HeroMovement : MonoBehaviour
     void OnBowShoot(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) { return; }
-        if(Time.time - LastShot < Cooldown) { return; }
+        if (Time.time - LastShot < Cooldown) { return; }
         LastShot = Time.time;
         Invoke("Shoot", ShotDelay);
         myAnimator.SetBool("IsShooting", true);
@@ -136,7 +139,7 @@ public class HeroMovement : MonoBehaviour
     }
     void OnFire()
     {
-        if(Time.time - LastShot < Cooldown) { return; }
+        if (Time.time - LastShot < Cooldown) { return; }
         LastShot = Time.time;
         myAnimator.SetBool("IsSwingingSword", true);
         ChangeSwingAnimation();
@@ -156,13 +159,23 @@ public class HeroMovement : MonoBehaviour
         }
         myAnimator.SetInteger("AttackAnimation", AttackAnimationInteger);
     }
-    void OnTriggerStay2D(Collider2D other) 
+    void OnTriggerStay2D(Collider2D other)
     {
-        Debug.Log("Debug");
         if (myAnimator.GetBool("IsSwingingSword") == false) { return; }
         if (other.tag == "EnemyHitBox")
         {
-            Debug.Log("SwordHit");
+            if (First)
+            {
+                First = false;
+                Debug.Log("Swordhit");
+                Enemy.EnemyTakeDamage(1);
+            }
         }
+        Invoke("SetFirstToTrue", Cooldown);
+    }
+    void SetFirstToTrue()
+    {
+        First = true;
+        CancelInvoke("SetFirstToTrue");
     }
 }

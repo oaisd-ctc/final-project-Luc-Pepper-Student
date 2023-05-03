@@ -15,6 +15,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float DeadBodyTimer = 5f;
     public Transform PlayerTransform;
     public bool IsChasing;
+    bool hit = true;
     GameObject PointADefault;
     Rigidbody2D EnemyRigidBody;
     PolygonCollider2D EnemyPolygonCollider;
@@ -76,14 +77,19 @@ public class EnemyScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("HitPlayer");
-            EnemyAnimator.SetBool("IsAttacking", true);
-            Invoke("EndAttack", AttackDuration);
+            if (hit)
+            {
+                hit = false;
+                Debug.Log("HitPlayer");
+                EnemyAnimator.SetBool("IsAttacking", true);
+                Invoke("EndAttack", AttackDuration);
+            }
         }
     }
     void EndAttack()
     {
         EnemyAnimator.SetBool("IsAttacking", false);
+        hit = true;
         CancelInvoke("EndAttack");
     }
 
@@ -111,7 +117,7 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            if(EnemyMoveSpeed > 0)
+            if (EnemyMoveSpeed > 0)
             {
                 transform.localScale = new Vector3(1, 1, 1);
             }
@@ -131,7 +137,7 @@ public class EnemyScript : MonoBehaviour
     {
         EnemyHealth -= DamageAmount;
 
-        if(EnemyHealth <= 0)
+        if (EnemyHealth <= 0)
         {
             Die();
         }
