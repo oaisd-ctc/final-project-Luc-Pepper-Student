@@ -198,11 +198,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PointA: {fileID: 0}
   PointB: {fileID: 0}
-  EnemyWalkSpeed: 1.5
-  EnemyRunSpeed: 3
+  EnemyWalkSpeed: 2
+  EnemyRunSpeed: 4
   EnemyMoveSpeed: 0
   AttackDuration: 1
-  ChaseDistance: 5
+  ChaseDistance: 7
   EnemyHealth: 0
   EnemyMaxHealth: 3
   DeadBodyTimer: 1.2

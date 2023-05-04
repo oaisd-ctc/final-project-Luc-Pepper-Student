@@ -44,10 +44,12 @@ public class EnemyScript : MonoBehaviour
         if (CurrentPoint == PointB.transform)
         {
             EnemyRigidBody.velocity = new Vector2(-EnemyMoveSpeed, 0);
+            transform.localScale = new Vector3(-1, 1, 1);
         }
         else
         {
             EnemyRigidBody.velocity = new Vector2(EnemyMoveSpeed, 0);
+            transform.localScale = new Vector3(1, 1, 1);
         }
         if (Vector2.Distance(transform.position, CurrentPoint.position) < 0.5f && CurrentPoint == PointA.transform)
         {
@@ -117,14 +119,6 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            if (EnemyMoveSpeed > 0)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
-            if (EnemyMoveSpeed < 0)
-            {
-                transform.localScale = new Vector3(-1, 1, 1);
-            }
             FlipandSpeed();
             if (Vector2.Distance(transform.position, PlayerTransform.position) < ChaseDistance)
             {

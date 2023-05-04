@@ -2,15 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : MonoBehaviour
+public class EnemyArrow : MonoBehaviour
 {
-    [SerializeField] float ArrowSpeed = 1f;
+    public float ArrowSpeed = 1f;
     [SerializeField] float ArrowDrop = 0f;
     [SerializeField] float ArrowLifeTime = 5f;
     Rigidbody2D myRigidBody;
     EnemyScript Enemy;
     SkeletonArcher SkeleArcher;
     HeroMovement player;
+
     float xSpeed;
     void Start()
     {
@@ -28,25 +29,18 @@ public class Arrow : MonoBehaviour
     }
     void FlipArrow()
     {
-        bool ArrowDirection = Mathf.Abs(myRigidBody.velocity.x) > Mathf.Epsilon;
-        if (ArrowDirection)
+        if (transform.position.x > player.transform.position.x)
         {
-            transform.localScale = new Vector2(Mathf.Sign(myRigidBody.velocity.x), 1f);
+            transform.localScale = new Vector3(1, 1, 1);
+        }
+        if (transform.position.x < player.transform.position.x)
+        {
+            transform.localScale = new Vector3(-1, 1, 1);
         }
     }
     void OnTriggerEnter2D(Collider2D other)
     {
         Destroy(gameObject);
-        if (other.tag == "EnemyHitBox")
-        {
-            Debug.Log("ArrowHit");
-            Enemy.EnemyTakeDamage(1);
-        }
-        if (other.tag == "SkeletonArcherHitBox")
-        {
-            Debug.Log("ArrowHit");
-            SkeleArcher.EnemyTakeDamage(1);
-        }
         if (other.tag == "Player")
         {
             Debug.Log("ArrowHitPlayer");

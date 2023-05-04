@@ -30,6 +30,7 @@ public class HeroMovement : MonoBehaviour
     BoxCollider2D myFeetCollider;
     Animator myAnimator;
     EnemyScript Enemy;
+    SkeletonArcher SkeleArcher;
     void Start()
     {
         DefaultRunSpeed = RunSpeed;
@@ -38,6 +39,7 @@ public class HeroMovement : MonoBehaviour
         myFeetCollider = GetComponent<BoxCollider2D>();
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         Enemy = FindObjectOfType<EnemyScript>();
+        SkeleArcher = FindObjectOfType<SkeletonArcher>();
         FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
@@ -169,6 +171,15 @@ public class HeroMovement : MonoBehaviour
                 First = false;
                 Debug.Log("Swordhit");
                 Enemy.EnemyTakeDamage(1);
+            }
+        }
+        if (other.tag == "SkeletonArcherHitBox")
+        {
+            if (First)
+            {
+                First = false;
+                Debug.Log("SwordHit");
+                SkeleArcher.EnemyTakeDamage(1);
             }
         }
         Invoke("SetFirstToTrue", Cooldown);
