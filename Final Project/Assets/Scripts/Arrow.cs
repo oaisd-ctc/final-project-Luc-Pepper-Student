@@ -10,6 +10,7 @@ public class Arrow : MonoBehaviour
     Rigidbody2D myRigidBody;
     EnemyScript Enemy;
     SkeletonArcher SkeleArcher;
+    SpearGoblin EnemySpearGoblin;
     HeroMovement player;
     float xSpeed;
     void Start()
@@ -18,6 +19,7 @@ public class Arrow : MonoBehaviour
         player = FindObjectOfType<HeroMovement>();
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
         Enemy = FindObjectOfType<EnemyScript>();
+        EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
         xSpeed = player.transform.localScale.x * ArrowSpeed;
     }
     void Update()
@@ -47,9 +49,10 @@ public class Arrow : MonoBehaviour
             Debug.Log("ArrowHit");
             SkeleArcher.EnemyTakeDamage(1);
         }
-        if (other.tag == "Player")
+        if (other.tag == "SpearGoblinHitBox")
         {
-            Debug.Log("ArrowHitPlayer");
+            Debug.Log("ArrowHit");
+            EnemySpearGoblin.EnemyTakeDamage(1);
         }
     }
 }

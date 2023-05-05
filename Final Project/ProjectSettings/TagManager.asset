@@ -11,6 +11,8 @@ TagManager:
   - PlayerSwordHitBox
   - SkeletonArcherHitBox
   - EnemyArrow
+  - EnemySpear
+  - SpearGoblinHitBox
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Enemies
   - EnemyArrows
   - SwordHItBox
-  - 
+  - EnemySpear
   - 
   - 
   - 

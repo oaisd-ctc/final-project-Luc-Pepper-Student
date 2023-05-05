@@ -31,6 +31,7 @@ public class HeroMovement : MonoBehaviour
     Animator myAnimator;
     EnemyScript Enemy;
     SkeletonArcher SkeleArcher;
+    SpearGoblin EnemySpearGoblin;
     void Start()
     {
         DefaultRunSpeed = RunSpeed;
@@ -40,6 +41,7 @@ public class HeroMovement : MonoBehaviour
         myBodyCollider = GetComponent<CapsuleCollider2D>();
         Enemy = FindObjectOfType<EnemyScript>();
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
+        EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
         FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
@@ -180,6 +182,15 @@ public class HeroMovement : MonoBehaviour
                 First = false;
                 Debug.Log("SwordHit");
                 SkeleArcher.EnemyTakeDamage(1);
+            }
+        }
+        if (other.tag == "SpearGoblinHitBox")
+        {
+            if (First)
+            {
+                First = false;
+                Debug.Log("ArrowHit");
+                EnemySpearGoblin.EnemyTakeDamage(1);
             }
         }
         Invoke("SetFirstToTrue", Cooldown);

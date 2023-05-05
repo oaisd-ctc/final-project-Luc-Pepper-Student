@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 504002223}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -272,7 +272,7 @@ MonoBehaviour:
   SkeletonArcherHealth: 3
   MaxSkeletonArcherHealth: 5
   SightDistance: 15
-  ShotDelay: 0.54
+  ShotDelay: 0.95
   ShootDuration: 1.03
   Cooldown: 1.5
   Arrow: {fileID: 4873118718724218143, guid: a4323188aedb862489c9499a0bba08e8, type: 3}
