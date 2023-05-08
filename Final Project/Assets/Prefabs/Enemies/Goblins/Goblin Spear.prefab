@@ -211,10 +211,10 @@ MonoBehaviour:
   DeadBodyTimer: 5
   SpearGoblinHealth: 3
   MaxSpearGoblinHealth: 5
-  SightDistance: 10
-  ShotDelay: 1
+  SightDistance: 15
+  ShotDelay: 0.8
   ShootDuration: 1
-  Cooldown: 1
+  Cooldown: 1.5
   Spear: {fileID: 3175137198406797516, guid: 63d5098e3871b8c46953ff335d48eff2, type: 3}
   ThrowPoint: {fileID: 4944192008329549526}
   PlayerTransform: {fileID: 0}
@@ -375,7 +375,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6130818790748768078}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.44, z: 0}
+  m_LocalPosition: {x: 1.62, y: 0.44, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

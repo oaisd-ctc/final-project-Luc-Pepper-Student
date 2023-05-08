@@ -58,7 +58,6 @@ public class SkeletonArcher : MonoBehaviour
             }
             if (transform.position.x < PlayerTransform.position.x)
             {
-
                 transform.localScale = new Vector3(1, 1, 1);
                 Shot();
             }
