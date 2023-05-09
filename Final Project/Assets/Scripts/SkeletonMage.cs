@@ -4,17 +4,24 @@ using UnityEngine;
 
 public class SkeletonMage : MonoBehaviour
 {
-    [SerializeField] Transform Player;
+    [SerializeField] GameObject Player;
+    [SerializeField] GameObject Fireball;
+    [SerializeField] Transform Staff;
     [SerializeField] Vector3 TeleportPoint;
     [SerializeField] float SightDistance = 5f;
     [SerializeField] float TeleportSightCheck = 5f;
     [SerializeField] float TeleportTime = 5f;
     [SerializeField] float TeleportEndTime = 5f;
+    [SerializeField] float Cooldown = 5f;
+    [SerializeField] float ShotDelay = 5f;
+    [SerializeField] float ShootDuration = 5f;
+    float LastShot;
     bool CanTeleport = true;
     Animator SkeletonMageAnimator;
     void Start()
     {
         SkeletonMageAnimator = GetComponent<Animator>();
+
     }
     void Update()
     {
@@ -23,22 +30,24 @@ public class SkeletonMage : MonoBehaviour
     }
     void Flip()
     {
-        if (Vector2.Distance(transform.position, Player.position) < SightDistance)
+        if (Vector2.Distance(transform.position, Player.transform.position) < SightDistance)
         {
-            if (transform.position.x > Player.position.x)
+            if (transform.position.x > Player.transform.position.x)
             {
                 transform.localScale = new Vector3(-1, 1, 1);
+                Shot();
             }
-            if (transform.position.x < Player.position.x)
+            if (transform.position.x < Player.transform.position.x)
             {
                 transform.localScale = new Vector3(1, 1, 1);
+                Shot();
             }
         }
     }
     void Teleport()
     {
         if (CanTeleport == false) { return; }
-        if (Vector2.Distance(transform.position, Player.position) < TeleportSightCheck)
+        if (Vector2.Distance(transform.position, Player.transform.position) < TeleportSightCheck)
         {
             SkeletonMageAnimator.SetBool("IsTeleporting", true);
             Invoke("TeleportInvoke", TeleportTime);
@@ -57,5 +66,28 @@ public class SkeletonMage : MonoBehaviour
     void TeleportEnd()
     {
         SkeletonMageAnimator.SetBool("EndingTeleport", false);
+    }
+    void Shot()
+    {
+        if (Time.time - LastShot < Cooldown) { return; }
+        LastShot = Time.time;
+        Invoke("Shoot", ShotDelay);
+        SkeletonMageAnimator.SetBool("IsShooting", true);
+        Invoke("EndFire", ShootDuration);
+    }
+    void Shoot()
+    {
+        if (SkeletonMageAnimator.GetBool("IsShooting") == true)
+        {
+            Fireball fireball = Instantiate(Fireball, Staff.position, transform.rotation).GetComponent<Fireball>();
+            fireball.SetTarget(Player);
+            CancelInvoke("Shoot");
+        }
+        else { return; }
+    }
+    void EndFire()
+    {
+        SkeletonMageAnimator.SetBool("IsShooting", false);
+        CancelInvoke("EndFire");
     }
 }

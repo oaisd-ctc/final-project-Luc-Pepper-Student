@@ -13,6 +13,7 @@ TagManager:
   - EnemyArrow
   - EnemySpear
   - SpearGoblinHitBox
+  - Fireball
   layers:
   - Default
   - TransparentFX
@@ -28,7 +29,7 @@ TagManager:
   - EnemyArrows
   - SwordHItBox
   - EnemySpear
-  - 
+  - FireBall
   - 
   - 
   - 
