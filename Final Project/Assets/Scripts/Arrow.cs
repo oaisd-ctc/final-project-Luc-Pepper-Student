@@ -12,6 +12,7 @@ public class Arrow : MonoBehaviour
     SkeletonArcher SkeleArcher;
     SpearGoblin EnemySpearGoblin;
     HeroMovement player;
+    SkeletonMage SkeleMage;
     float xSpeed;
     void Start()
     {
@@ -20,6 +21,7 @@ public class Arrow : MonoBehaviour
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
         Enemy = FindObjectOfType<EnemyScript>();
         EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
+        SkeleMage = FindObjectOfType<SkeletonMage>();
         xSpeed = player.transform.localScale.x * ArrowSpeed;
     }
     void Update()
@@ -53,6 +55,11 @@ public class Arrow : MonoBehaviour
         {
             Debug.Log("ArrowHit");
             EnemySpearGoblin.EnemyTakeDamage(1);
+        }
+        if (other.tag == "SkeletonMageHitBox")
+        {
+            Debug.Log("ArrowHit");
+            SkeleMage.EnemyTakeDamage(1);
         }
     }
 }

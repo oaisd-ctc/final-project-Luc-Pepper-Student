@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 984753364392053730}
   - component: {fileID: 984753364392053733}
   m_Layer: 10
-  m_Name: EnemyHitBox
-  m_TagString: EnemyHitBox
+  m_Name: SkeleMageHitbox
+  m_TagString: SkeletonMageHitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -99,7 +99,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0642513, y: 0.13160783}
+  m_Offset: {x: -0.046551123, y: 0.13160783}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -110,7 +110,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6162617, y: 1.267841}
+  m_Size: {x: 0.7047621, y: 1.267841}
   m_EdgeRadius: 0
 --- !u!95 &984753364392053733
 Animator:
@@ -388,11 +388,14 @@ MonoBehaviour:
   Player: {fileID: 0}
   Fireball: {fileID: 3732456062549125242, guid: d78b94d719fe79c468b934be20222f2a, type: 3}
   Staff: {fileID: 8562455170900161697}
-  TeleportPoint: {x: 9, y: 1, z: -1}
-  SightDistance: 15
-  TeleportSightCheck: 10
+  TeleportPoint: {x: 10, y: 1, z: -1}
+  SightDistance: 20
+  TeleportSightCheck: 8
   TeleportTime: 1.2
   TeleportEndTime: 0.7
-  Cooldown: 5
-  ShotDelay: 5
-  ShootDuration: 5
+  Cooldown: 4
+  ShotDelay: 0.95
+  ShootDuration: 1.42
+  SkeletonMageMaxHealth: 3
+  SkeletonMageHealth: 0
+  DeadBodyTimer: 1

@@ -48,6 +48,7 @@ public class Fireball : MonoBehaviour
         if (other.tag == "Player")
         {
             Debug.Log("FireHitPlayer");
+            Destroy(gameObject);
         }
     }
 }

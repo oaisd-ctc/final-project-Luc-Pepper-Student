@@ -15,13 +15,17 @@ public class SkeletonMage : MonoBehaviour
     [SerializeField] float Cooldown = 5f;
     [SerializeField] float ShotDelay = 5f;
     [SerializeField] float ShootDuration = 5f;
+    [SerializeField] float SkeletonMageMaxHealth = 5f;
+    [SerializeField] float SkeletonMageHealth;
+    [SerializeField] float DeadBodyTimer;
     float LastShot;
+    bool Died;
     bool CanTeleport = true;
     Animator SkeletonMageAnimator;
     void Start()
     {
         SkeletonMageAnimator = GetComponent<Animator>();
-
+        SkeletonMageHealth = SkeletonMageMaxHealth;
     }
     void Update()
     {
@@ -46,6 +50,7 @@ public class SkeletonMage : MonoBehaviour
     }
     void Teleport()
     {
+        if (Died == true) { return; }
         if (CanTeleport == false) { return; }
         if (Vector2.Distance(transform.position, Player.transform.position) < TeleportSightCheck)
         {
@@ -89,5 +94,21 @@ public class SkeletonMage : MonoBehaviour
     {
         SkeletonMageAnimator.SetBool("IsShooting", false);
         CancelInvoke("EndFire");
+    }
+    public void EnemyTakeDamage(float DamageAmount)
+    {
+        SkeletonMageHealth -= DamageAmount;
+
+        if (SkeletonMageHealth <= 0)
+        {
+            Die();
+        }
+    }
+    void Die()
+    {
+        Died = true;
+        SkeletonMageAnimator.Play("Die");
+        Destroy(gameObject, DeadBodyTimer);
+        this.enabled = false;
     }
 }
