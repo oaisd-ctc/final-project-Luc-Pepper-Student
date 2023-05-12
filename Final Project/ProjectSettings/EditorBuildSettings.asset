@@ -5,8 +5,23 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
-    path: Assets/Scenes/PracticeScene.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/HomeLevel.unity
+    guid: 2890f09abe53c934f92906ff9748fe86
+  - enabled: 1
+    path: Assets/Scenes/Houses/FirstHouse.unity
+    guid: aea773d9e535b94478fe8adcc5076425
+  - enabled: 1
+    path: Assets/Scenes/Houses/SecondHouse.unity
+    guid: c68e2fda7168d6744a388f1e1526a1d7
+  - enabled: 1
+    path: Assets/Scenes/Houses/ThirdHouse.unity
+    guid: de80893fefb339f41b6b5b38c466d184
+  - enabled: 1
+    path: Assets/Scenes/Houses/FourthHouse.unity
+    guid: 3322d7559b645364eab14cb9e51f4d33
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 8fe70904a7bf4b34cbea42604a4f7642, type: 2}

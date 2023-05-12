@@ -15,6 +15,8 @@ TagManager:
   - SpearGoblinHitBox
   - Fireball
   - SkeletonMageHitBox
+  - DoorDetector
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -31,8 +33,8 @@ TagManager:
   - SwordHItBox
   - EnemySpear
   - FireBall
-  - 
-  - 
+  - DoorDetector
+  - Doors
   - 
   - 
   - 

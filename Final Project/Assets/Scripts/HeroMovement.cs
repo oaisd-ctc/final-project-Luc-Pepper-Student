@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HeroMovement : MonoBehaviour
 {
@@ -14,6 +15,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] float ShotDelay = 5f;
     [SerializeField] float SwingDuration = 5f;
     [SerializeField] float Cooldown = 5f;
+    [SerializeField] float PlayerDoorTeleportTimer = 5f;
     float LastShot;
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
@@ -33,6 +35,9 @@ public class HeroMovement : MonoBehaviour
     SkeletonArcher SkeleArcher;
     SpearGoblin EnemySpearGoblin;
     SkeletonMage SkeleMage;
+    public float DoorCooldown;
+    public bool CanEnterDoor;
+    public static int DoorIndex;
     void Start()
     {
         DefaultRunSpeed = RunSpeed;
@@ -210,5 +215,30 @@ public class HeroMovement : MonoBehaviour
     {
         First = true;
         CancelInvoke("SetFirstToTrue");
+    }
+    void OnEnterDoor()
+    {
+        Invoke("WhichDoor", DoorCooldown);
+        Invoke("DoorTransform", PlayerDoorTeleportTimer);
+    }
+    void WhichDoor()
+    {
+        if (CanEnterDoor == false) { return; }
+        if (CanEnterDoor)
+        {
+            Debug.Log("YERT");
+            SceneManager.LoadScene(DoorIndex);
+            CanEnterDoor = false;
+            CancelInvoke("WhichDoor");
+        }
+    }
+    void DoorTransform()
+    {
+        Scene WhereDidYouComeFromWhereDidYouGoWhereDidYouComeFromCottenEyedJoe = SceneManager.GetActiveScene();
+        if (WhereDidYouComeFromWhereDidYouGoWhereDidYouComeFromCottenEyedJoe.name == "FirstHouse")
+        {
+            transform.position = new Vector3(-50f, -10f, 0f);
+            Debug.Log("Hello World");
+        }
     }
 }
