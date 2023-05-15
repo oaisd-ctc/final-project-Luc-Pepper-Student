@@ -15,7 +15,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] float ShotDelay = 5f;
     [SerializeField] float SwingDuration = 5f;
     [SerializeField] float Cooldown = 5f;
-    [SerializeField] float PlayerDoorTeleportTimer = 5f;
+    [SerializeField] Transform Door1;
     float LastShot;
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
@@ -25,7 +25,6 @@ public class HeroMovement : MonoBehaviour
     float DefaultRunSpeed;
     Vector2 MoveInput;
     Vector2 PlayerVelocity;
-    Vector2 PlayerRollVelocity;
     Vector2 PlayerJumpHeight;
     Rigidbody2D myRigidbody;
     CapsuleCollider2D myBodyCollider;
@@ -34,6 +33,7 @@ public class HeroMovement : MonoBehaviour
     EnemyScript Enemy;
     SkeletonArcher SkeleArcher;
     SpearGoblin EnemySpearGoblin;
+    DataSaver DataSaver;
     SkeletonMage SkeleMage;
     public float DoorCooldown;
     public bool CanEnterDoor;
@@ -49,6 +49,7 @@ public class HeroMovement : MonoBehaviour
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
         EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
         SkeleMage = FindObjectOfType<SkeletonMage>();
+        DataSaver = FindObjectOfType<DataSaver>();
         FallVelocity = myRigidbody.velocity.y;
     }
     void Update()
@@ -219,26 +220,19 @@ public class HeroMovement : MonoBehaviour
     void OnEnterDoor()
     {
         Invoke("WhichDoor", DoorCooldown);
-        Invoke("DoorTransform", PlayerDoorTeleportTimer);
     }
     void WhichDoor()
     {
         if (CanEnterDoor == false) { return; }
         if (CanEnterDoor)
         {
-            Debug.Log("YERT");
+            Scene CameFrom = SceneManager.GetActiveScene();
+            Debug.Log("LoadScene");
+            DataSaver.PlayerTransform();
             SceneManager.LoadScene(DoorIndex);
             CanEnterDoor = false;
+            
             CancelInvoke("WhichDoor");
-        }
-    }
-    void DoorTransform()
-    {
-        Scene WhereDidYouComeFromWhereDidYouGoWhereDidYouComeFromCottenEyedJoe = SceneManager.GetActiveScene();
-        if (WhereDidYouComeFromWhereDidYouGoWhereDidYouComeFromCottenEyedJoe.name == "FirstHouse")
-        {
-            transform.position = new Vector3(-50f, -10f, 0f);
-            Debug.Log("Hello World");
         }
     }
 }

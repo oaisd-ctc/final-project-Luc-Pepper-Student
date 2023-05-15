@@ -350,9 +350,9 @@ MonoBehaviour:
   ShotDelay: 0.54
   SwingDuration: 0.45
   Cooldown: 0.45
+  Door1: {fileID: 0}
   Arrow: {fileID: 4873118718724218143, guid: 091eefe8e880cdb4b810d3e55eb99ac7, type: 3}
   Bow: {fileID: 6530384321143265901}
-  FirstDoorPoint: {x: -22.1, y: -1.3, z: 0}
   DoorCooldown: 0.2
   CanEnterDoor: 0
 --- !u!114 &515608124
