@@ -20,6 +20,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
     bool First = true;
+    static int FromSceneIndex;
     int AttackAnimationInteger = 2;
     float FallVelocity;
     float DefaultRunSpeed;
@@ -33,7 +34,6 @@ public class HeroMovement : MonoBehaviour
     EnemyScript Enemy;
     SkeletonArcher SkeleArcher;
     SpearGoblin EnemySpearGoblin;
-    DataSaver DataSaver;
     SkeletonMage SkeleMage;
     public float DoorCooldown;
     public bool CanEnterDoor;
@@ -49,8 +49,22 @@ public class HeroMovement : MonoBehaviour
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
         EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
         SkeleMage = FindObjectOfType<SkeletonMage>();
-        DataSaver = FindObjectOfType<DataSaver>();
         FallVelocity = myRigidbody.velocity.y;
+        switch (FromSceneIndex)
+        {
+            case 1:
+                gameObject.transform.position = GameObject.Find("FirstHouseDoor").GetComponent<Door>().transform.position;
+                break;
+            case 2:
+                gameObject.transform.position = GameObject.Find("SecondHouseDoor").GetComponent<Door>().transform.position;
+                break;
+            case 3:
+                gameObject.transform.position = GameObject.Find("ThirdHouseDoor").GetComponent<Door>().transform.position;
+                break;
+            case 4:
+                gameObject.transform.position = GameObject.Find("FourthHouseDoor").GetComponent<Door>().transform.position;
+                break;
+        }
     }
     void Update()
     {
@@ -226,12 +240,9 @@ public class HeroMovement : MonoBehaviour
         if (CanEnterDoor == false) { return; }
         if (CanEnterDoor)
         {
-            Scene CameFrom = SceneManager.GetActiveScene();
-            Debug.Log("LoadScene");
-            DataSaver.PlayerTransform();
+            FromSceneIndex = SceneManager.GetActiveScene().buildIndex;
             SceneManager.LoadScene(DoorIndex);
             CanEnterDoor = false;
-            
             CancelInvoke("WhichDoor");
         }
     }

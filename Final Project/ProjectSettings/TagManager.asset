@@ -17,6 +17,7 @@ TagManager:
   - SkeletonMageHitBox
   - DoorDetector
   - Door
+  - UI
   layers:
   - Default
   - TransparentFX
@@ -35,7 +36,7 @@ TagManager:
   - FireBall
   - DoorDetector
   - Doors
-  - 
+  - UI
   - 
   - 
   - 
@@ -65,4 +66,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 3794497095
+    locked: 0
+  - name: UI
+    uniqueID: 2307105115
     locked: 0
