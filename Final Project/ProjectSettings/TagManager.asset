@@ -18,6 +18,7 @@ TagManager:
   - DoorDetector
   - Door
   - UI
+  - NPC
   layers:
   - Default
   - TransparentFX
@@ -37,7 +38,7 @@ TagManager:
   - DoorDetector
   - Doors
   - UI
-  - 
+  - NPC
   - 
   - 
   - 
@@ -57,6 +58,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1546713173
+    locked: 0
+  - name: NPC
+    uniqueID: 1882793237
     locked: 0
   - name: Ground
     uniqueID: 4013200929
