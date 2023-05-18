@@ -35,6 +35,8 @@ public class HeroMovement : MonoBehaviour
     SkeletonArcher SkeleArcher;
     SpearGoblin EnemySpearGoblin;
     SkeletonMage SkeleMage;
+    MerchantScript Merchant;
+    public bool InteractWithMerchant;
     public float DoorCooldown;
     public bool CanEnterDoor;
     public static int DoorIndex;
@@ -49,6 +51,7 @@ public class HeroMovement : MonoBehaviour
         SkeleArcher = FindObjectOfType<SkeletonArcher>();
         EnemySpearGoblin = FindObjectOfType<SpearGoblin>();
         SkeleMage = FindObjectOfType<SkeletonMage>();
+        Merchant = FindObjectOfType<MerchantScript>();
         FallVelocity = myRigidbody.velocity.y;
         switch (FromSceneIndex)
         {
@@ -233,7 +236,9 @@ public class HeroMovement : MonoBehaviour
     }
     void OnEnterDoor()
     {
+        InteractWithMerchant = true;
         Invoke("WhichDoor", DoorCooldown);
+        Invoke("CantInteractWithMerchant", .5f);
     }
     void WhichDoor()
     {
@@ -245,5 +250,9 @@ public class HeroMovement : MonoBehaviour
             CanEnterDoor = false;
             CancelInvoke("WhichDoor");
         }
+    }
+    void CantInteractWithMerchant()
+    {
+        InteractWithMerchant = false;
     }
 }

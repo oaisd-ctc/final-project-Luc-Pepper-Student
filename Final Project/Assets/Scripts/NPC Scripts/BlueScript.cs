@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BlueScript : MonoBehaviour
 {
-    public Dialogue Dialogue;
     bool HasBeenSaved;
     void Start()
     {
@@ -14,19 +13,6 @@ public class BlueScript : MonoBehaviour
     }
     void Update()
     {
-        if(HasBeenSaved == false) { return; }
-        PlayerWalksIntoShop();
-    }
-    void PlayerWalksIntoShop()
-    {
-        if(SceneManager.GetActiveScene().buildIndex == 1)
-        {
-            TriggerDialogue();
-        }
-        else { return; }
-    }
-    public void TriggerDialogue()
-    {
-        FindObjectOfType<DialogueManager>().StartDialogue(Dialogue);
+        if (HasBeenSaved == false) { return; }
     }
 }
