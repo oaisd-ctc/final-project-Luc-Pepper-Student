@@ -14,7 +14,7 @@ public class SkeletonArcher : MonoBehaviour
     [SerializeField] GameObject Arrow;
     [SerializeField] Transform Bow;
     EnemyArrow SkeleArcherEnemyArrow;
-    float  ArrowSpeed;
+    float  SkeleArcherArrowSpeed;
     float LastShot;
     Rigidbody2D SkeletonArcherRigidBody;
     public Transform PlayerTransform;
@@ -25,7 +25,6 @@ public class SkeletonArcher : MonoBehaviour
         SkeletonArcherRigidBody = GetComponent<Rigidbody2D>();
         SkeletonArcherAnimator = GetComponent<Animator>();
         SkeleArcherEnemyArrow = FindObjectOfType<EnemyArrow>();
-        SkeleArcherEnemyArrow.ArrowSpeed = ArrowSpeed;
     }
     void Update()
     {

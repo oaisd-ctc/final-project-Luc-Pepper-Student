@@ -25,10 +25,18 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.transform.SetParent(this.transform);
         }
+        if (collision.CompareTag("Enemy"))
+        {
+            collision.transform.SetParent(this.transform);
+        }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
+        {
+            collision.transform.SetParent(null);
+        }
+        if (collision.CompareTag("Enemy"))
         {
             collision.transform.SetParent(null);
         }

@@ -6,6 +6,7 @@ public class SkeletonMage : MonoBehaviour
 {
     [SerializeField] GameObject Player;
     [SerializeField] GameObject Fireball;
+    [SerializeField] GameObject ThisEnemy;
     [SerializeField] Transform Staff;
     [SerializeField] Vector3 TeleportPoint;
     [SerializeField] float SightDistance = 5f;
@@ -108,7 +109,6 @@ public class SkeletonMage : MonoBehaviour
     {
         Died = true;
         SkeletonMageAnimator.Play("Die");
-        Destroy(gameObject, DeadBodyTimer);
-        this.enabled = false;
+        Destroy(ThisEnemy);
     }
 }
