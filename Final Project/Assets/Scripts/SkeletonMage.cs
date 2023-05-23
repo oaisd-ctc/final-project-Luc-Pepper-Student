@@ -109,6 +109,6 @@ public class SkeletonMage : MonoBehaviour
     {
         Died = true;
         SkeletonMageAnimator.Play("Die");
-        Destroy(ThisEnemy);
+        Destroy(ThisEnemy, DeadBodyTimer);
     }
 }

@@ -6,7 +6,7 @@ public class MerchantPopUp : MonoBehaviour
 {
     public void OnClickContinue()
     {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(5);
     }
     public void OnClickExit()
     {
